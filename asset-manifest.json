@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/logoadd/static/css/main.c76221e9.css",
+    "main.js": "/logoadd/static/js/main.8544933a.js",
+    "static/js/488.b30a55b9.chunk.js": "/logoadd/static/js/488.b30a55b9.chunk.js",
+    "index.html": "/logoadd/index.html",
+    "main.c76221e9.css.map": "/logoadd/static/css/main.c76221e9.css.map",
+    "main.8544933a.js.map": "/logoadd/static/js/main.8544933a.js.map",
+    "488.b30a55b9.chunk.js.map": "/logoadd/static/js/488.b30a55b9.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c76221e9.css",
+    "static/js/main.8544933a.js"
+  ]
+}
