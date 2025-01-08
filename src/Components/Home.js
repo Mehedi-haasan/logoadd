@@ -3,93 +3,11 @@ import Next from "../Icons/Next"
 import SubNext from "../Icons/SubNext";
 import Prev from "../Icons/Prev";
 import SubPrev from "../Icons/SubPrev";
-import TShirtCanvas from "../Components/TShirtCanvas";
 
 function Home() {
 
-    const [tshirtImage, setTshirtImage] = useState(null);
-    const [logoImage, setLogoImage] = useState(null);
     const [values, setValues] = useState({
-        datas: [{
-            "id": 1,
-            "name": "Kaylah Weimann",
-            "email": "ebert.doris@example.com",
-            "email_verified_at": "2025-01-06T13:49:21.000000Z",
-            "created_at": "2025-01-06T13:49:21.000000Z",
-            "updated_at": "2025-01-06T13:49:21.000000Z"
-        },
-        {
-            "id": 2,
-            "name": "Dr. Narciso Stamm IV",
-            "email": "kreiger.maureen@example.org",
-            "email_verified_at": "2025-01-06T13:49:21.000000Z",
-            "created_at": "2025-01-06T13:49:21.000000Z",
-            "updated_at": "2025-01-06T13:49:21.000000Z"
-        },
-        {
-            "id": 3,
-            "name": "Gerda Schowalter",
-            "email": "casimir57@example.com",
-            "email_verified_at": "2025-01-06T13:49:21.000000Z",
-            "created_at": "2025-01-06T13:49:21.000000Z",
-            "updated_at": "2025-01-06T13:49:21.000000Z"
-        },
-        {
-            "id": 4,
-            "name": "London Hermann",
-            "email": "abel34@example.net",
-            "email_verified_at": "2025-01-06T13:49:21.000000Z",
-            "created_at": "2025-01-06T13:49:21.000000Z",
-            "updated_at": "2025-01-06T13:49:21.000000Z"
-        },
-        {
-            "id": 5,
-            "name": "Geraldine Kiehn",
-            "email": "nicklaus.larkin@example.org",
-            "email_verified_at": "2025-01-06T13:49:21.000000Z",
-            "created_at": "2025-01-06T13:49:21.000000Z",
-            "updated_at": "2025-01-06T13:49:21.000000Z"
-        },
-        {
-            "id": 6,
-            "name": "Prof. Casimer Legros",
-            "email": "vsimonis@example.com",
-            "email_verified_at": "2025-01-06T13:49:21.000000Z",
-            "created_at": "2025-01-06T13:49:21.000000Z",
-            "updated_at": "2025-01-06T13:49:21.000000Z"
-        },
-        {
-            "id": 7,
-            "name": "Dr. Howard Fay",
-            "email": "mitchell.elisha@example.com",
-            "email_verified_at": "2025-01-06T13:49:21.000000Z",
-            "created_at": "2025-01-06T13:49:21.000000Z",
-            "updated_at": "2025-01-06T13:49:21.000000Z"
-        },
-        {
-            "id": 8,
-            "name": "Ivy Herzog",
-            "email": "elwyn.cronin@example.net",
-            "email_verified_at": "2025-01-06T13:49:21.000000Z",
-            "created_at": "2025-01-06T13:49:21.000000Z",
-            "updated_at": "2025-01-06T13:49:21.000000Z"
-        },
-        {
-            "id": 9,
-            "name": "Hadley Orn",
-            "email": "zkonopelski@example.net",
-            "email_verified_at": "2025-01-06T13:49:21.000000Z",
-            "created_at": "2025-01-06T13:49:21.000000Z",
-            "updated_at": "2025-01-06T13:49:21.000000Z"
-        },
-        {
-            "id": 10,
-            "name": "Prof. Kurt Mills IV",
-            "email": "fannie91@example.net",
-            "email_verified_at": "2025-01-06T13:49:21.000000Z",
-            "created_at": "2025-01-06T13:49:21.000000Z",
-            "updated_at": "2025-01-06T13:49:21.000000Z"
-        }],
+        datas: [],
         name: '',
         current_page: 1,
         per_page: 10,
@@ -172,29 +90,6 @@ function Home() {
         FetchData()
     }, [])
 
-
-    const loadImage = (file, callback) => {
-        const reader = new FileReader();
-        reader.onload = () => {
-            const img = new Image();
-            img.src = reader.result;
-            img.onload = () => callback(img);
-        };
-        reader.readAsDataURL(file);
-    };
-
-    // Handle T-shirt image upload
-    const handleTshirtUpload = (e) => {
-        const file = e.target.files[0];
-        loadImage(file, setTshirtImage);
-    };
-
-    // Handle Logo image upload
-    const handleLogoUpload = (e) => {
-        const file = e.target.files[0];
-        loadImage(file, setLogoImage);
-    };
-
     const handleSearch = async (e) => {
         const nam = e.target.value
         setValues({ ...values, name: nam });
@@ -240,10 +135,25 @@ function Home() {
         }
     };
 
+    function formatCreatedAt(user) {
+        const createdAt = new Date(user);
+        const options = {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+            timeZoneName: "short"
+        };
+
+        return createdAt.toLocaleDateString("en-US", options);
+    }
+
     return (
         <div>
             <div>
-                <input onChange={handleSearch} placeholder="Enter user name" className="border rounded p-1 focus::outline-none my-1 ml-4" />
+                <input onChange={handleSearch} placeholder="Enter user name" className="border rounded p-1 focus:outline-none my-1 ml-4" />
             </div>
             <div className="relative overflow-x-auto shadow">
                 <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -256,19 +166,19 @@ function Home() {
                                 </div>
                             </th>
                             <th scope="col" className="px-6 py-3">
-                                First Name
+                                Full Name
                             </th>
                             <th scope="col" className="px-6 py-3">
-                                Last Name
+                                Email
                             </th>
                             <th scope="col" className="px-6 py-3">
-                                Address
+                                Created At
                             </th>
                             <th scope="col" className="px-6 py-3">
-                                State
+                                Updated At
                             </th>
                             <th scope="col" className="px-6 py-3">
-                                Phone Number
+                                Email Verified At
                             </th>
                         </tr>
                     </thead>
@@ -287,15 +197,16 @@ function Home() {
                                     </th>
                                     <td className="px-6 py-4">
                                         {data?.email}
+
                                     </td>
                                     <td className="px-6 py-4">
-                                        Laptop
+                                        {formatCreatedAt(data?.created_at)}
                                     </td>
                                     <td className="px-6 py-4">
-                                        {data?.id}
+                                        {formatCreatedAt(data?.updated_at)}
                                     </td>
                                     <td className="px-6 py-4">
-                                        {data?.email_verified_at}
+                                        {formatCreatedAt(data?.email_verified_at)}
                                     </td>
                                 </tr>
                             })
